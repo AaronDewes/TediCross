@@ -16,6 +16,7 @@ const R = require("ramda");
 const { sleepOneMinute } = require("../sleep");
 const helpers = require("./helpers");
 const fetchDiscordChannel = require("../fetchDiscordChannel");
+const fetch = require("node-fetch");
 
 /***********
  * Helpers *
@@ -119,6 +120,21 @@ function setup(logger, dcBot, tgBot, messageMap, bridgeMap, settings, datadirPat
 				.catch(helpers.ignoreAlreadyDeletedError);
 
 			// Don't process the message any further
+			return;
+		}
+
+		// Check if this is a request for the bitcoin price
+		if (message.channel.type === "text" && message.cleanContent.toLowerCase().startsWith("/bitcoinprice")) {
+			let currency = message.cleanContent.substr(14).toUpperCase();
+			if(currency == "") {
+				currency = "USD";
+			}
+			fetch('https://api.coinbase.com/v2/prices/spot?currency=' + currency)
+				.then(response => response.json())
+				.then(data => {
+					message.reply(`The current Bitcoin price in the is ${data.data.amount} ${data.data.currency}`);
+				})
+				.catch();
 			return;
 		}
 
@@ -237,9 +253,9 @@ function setup(logger, dcBot, tgBot, messageMap, bridgeMap, settings, datadirPat
 				antiInfoSpamSet.add(message.channel.id);
 
 				message.reply(
-					"This is an instance of a TediCross bot, bridging a chat in Telegram with one in Discord. " +
-						"If you wish to use TediCross yourself, please download and create an instance. " +
-						"See https://github.com/TediCross/TediCross"
+					"This bot is only made to be used in the Umbrel Discord Server, not anywhere else. " +
+						"If you wish to use this bot yourself, please download and create an instance. " +
+						"See https://github.com/AaronDewes/UmbrelBot"
 				)
 					// Delete it again after some time
 					.then(sleepOneMinute)
