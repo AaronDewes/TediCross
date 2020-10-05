@@ -111,7 +111,7 @@ const bitcoinPrice = ctx => {
 	fetch('https://api.coinbase.com/v2/prices/spot?currency=' + currency)
 		.then(response => response.json())
 		.then(data => {
-			ctx.reply(`The current Bitcoin price in the is ${data.data.amount} ${data.data.currency}`)
+			ctx.reply(`The current Bitcoin price is ${data.data.amount} ${data.data.currency}`)
 				// Wait some time
 				.then(sleepOneMinute)
 				// Delete the info and the command

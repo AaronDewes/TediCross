@@ -132,7 +132,7 @@ function setup(logger, dcBot, tgBot, messageMap, bridgeMap, settings, datadirPat
 			fetch('https://api.coinbase.com/v2/prices/spot?currency=' + currency)
 				.then(response => response.json())
 				.then(data => {
-					message.reply(`The current Bitcoin price in the is ${data.data.amount} ${data.data.currency}`);
+					message.reply(`The current Bitcoin price is ${data.data.amount} ${data.data.currency}`);
 				})
 				.catch();
 			// Don't process the message any further
