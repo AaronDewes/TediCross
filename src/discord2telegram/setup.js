@@ -135,6 +135,15 @@ function setup(logger, dcBot, tgBot, messageMap, bridgeMap, settings, datadirPat
 					message.reply(`The current Bitcoin price in the is ${data.data.amount} ${data.data.currency}`);
 				})
 				.catch();
+			// Don't process the message any further
+			return;
+		}
+
+		// Check if this is a request for the bitcoin price
+		if (message.channel.type === "text" && message.cleanContent.toLowerCase().startsWith("/help")) {
+			message.reply('Commands:\n/bitcoinprice [currency]: Price of a Bitcoin in a specific currency.\nMore commands aren\'t available, but will be added soon.');
+
+			// Don't process the message any further
 			return;
 		}
 

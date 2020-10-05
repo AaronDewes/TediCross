@@ -36,6 +36,34 @@ const createMessageHandler = R.curry((func, ctx) => {
  *************************/
 
 /**
+ * Replies to a message with help
+ *
+ * @param {Object} ctx	The Telegraf context
+ * @param {Object} ctx.tediCross	The TediCross object on the context
+ * @param {Object} ctx.tediCross.message	The message to reply to
+ * @param {Object} ctx.tediCross.message.chat	The object of the chat the message is from
+ * @param {Integer} ctx.tediCross.message.chat.id	ID of the chat the message is from
+ *
+ * @returns {undefined}
+ */
+const help = ctx => {
+	// Reply with the info
+	ctx.reply('Commands:\n/bitcoinprice [currency]: Price of a Bitcoin in a specific currency.\nMore commands aren\'t available, but will be added soon.')
+		// Wait some time
+		.then(sleepOneMinute)
+		// Delete the info and the command
+		.then(message =>
+			Promise.all([
+				// Delete the info
+				helpers.deleteMessage(ctx, message),
+				// Delete the command
+				ctx.deleteMessage()
+			])
+		)
+		.catch(helpers.ignoreAlreadyDeletedError);
+};
+
+/**
  * Replies to a message with info about the chat
  *
  * @param {Object} ctx	The Telegraf context
@@ -311,6 +339,7 @@ const handleEdits = createMessageHandler(async (ctx, bridge) => {
 module.exports = {
 	chatinfo,
 	bitcoinPrice,
+	help,
 	newChatMembers,
 	leftChatMember,
 	relayMessage,
