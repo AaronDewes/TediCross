@@ -480,10 +480,14 @@ function addFileObj(ctx, next) {
 		};
 	} else if (!R.isNil(message.voice)) {
 		// Voice
+		let extension = mime.getExtension(message.voice.mime_type);
+		if(extension = "oga") {
+			extension = "ogg";
+		}
 		ctx.tediCross.file = {
 			type: "voice",
 			id: message.voice.file_id,
-			name: "voice" + "." + mime.getExtension(message.voice.mime_type)
+			name: "voice" + "." + extension
 		};
 	}
 
