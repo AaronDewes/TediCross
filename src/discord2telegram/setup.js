@@ -141,7 +141,9 @@ function setup(logger, dcBot, tgBot, messageMap, bridgeMap, settings, datadirPat
 
 		// Check if this is a request for the bitcoin price
 		if (message.channel.type === "text" && message.cleanContent.toLowerCase().startsWith("/help")) {
-			message.reply('Commands:\n/bitcoinprice [currency]: Price of a Bitcoin in a specific currency.\nMore commands aren\'t available, but will be added soon.');
+			message.reply('Commands:\n/bitcoinprice [currency]: Price of a Bitcoin in a specific currency.\n' +
+			'Use 3-letter codes (https://www.xe.com/iso4217.php)\n\n' +
+			'More commands aren\'t available, but will be added soon.');
 
 			// Don't process the message any further
 			return;

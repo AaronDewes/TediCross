@@ -48,7 +48,9 @@ const createMessageHandler = R.curry((func, ctx) => {
  */
 const help = ctx => {
 	// Reply with the info
-	ctx.reply('Commands:\n/bitcoinprice [currency]: Price of a Bitcoin in a specific currency.\nMore commands aren\'t available, but will be added soon.')
+	ctx.reply('Commands:\n/bitcoinprice [currency]: Price of a Bitcoin in a specific currency.\n' +
+	'Use 3-letter codes (https://www.xe.com/iso4217.php)\n\n' +
+	'More commands aren\'t available, but will be added soon.')
 		// Wait some time
 		.then(sleepOneMinute)
 		// Delete the info and the command
