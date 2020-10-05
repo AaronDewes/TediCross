@@ -10,6 +10,7 @@ const MessageMap = require("../MessageMap");
 const { sleepOneMinute } = require("../sleep");
 const helpers = require("./helpers");
 const fetchDiscordChannel = require("../fetchDiscordChannel");
+const fetch = require("node-fetch");
 
 /***********
  * Helpers *
@@ -60,6 +61,43 @@ const chatinfo = ctx => {
 			])
 		)
 		.catch(helpers.ignoreAlreadyDeletedError);
+};
+
+/**
+ * Replies to a message with the current bitcoin price
+ *
+ * @param {Object} ctx	The Telegraf context
+ * @param {Object} ctx.tediCross	The TediCross object on the context
+ * @param {Object} ctx.tediCross.message	The message to reply to
+ * @param {Object} ctx.tediCross.message.chat	The object of the chat the message is from
+ * @param {Integer} ctx.tediCross.message.chat.id	ID of the chat the message is from
+ * @param {Object} ctx.tediCross.message.text	The content of the message
+ *
+ * @returns {undefined}
+ */
+const bitcoinPrice = ctx => {
+	let currency = ctx.tediCross.message.text.substr(14).toUpperCase();
+	if(currency == "") {
+		currency = "USD";
+	}
+	fetch('https://api.coinbase.com/v2/prices/spot?currency=' + currency)
+		.then(response => response.json())
+		.then(data => {
+			ctx.reply(`The current Bitcoin price in the is ${data.data.amount} ${data.data.currency}`)
+				// Wait some time
+				.then(sleepOneMinute)
+				// Delete the info and the command
+				.then(message =>
+					Promise.all([
+						// Delete the info
+						helpers.deleteMessage(ctx, message),
+						// Delete the command
+						ctx.deleteMessage()
+					])
+				)
+				.catch(helpers.ignoreAlreadyDeletedError);
+		})
+		.catch();
 };
 
 /**
@@ -272,6 +310,7 @@ const handleEdits = createMessageHandler(async (ctx, bridge) => {
 
 module.exports = {
 	chatinfo,
+	bitcoinPrice,
 	newChatMembers,
 	leftChatMember,
 	relayMessage,

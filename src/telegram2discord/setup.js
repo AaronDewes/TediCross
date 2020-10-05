@@ -79,6 +79,8 @@ function setup(logger, tgBot, dcBot, messageMap, bridgeMap, settings) {
 			tgBot.use(middlewares.addMessageObj);
 			tgBot.use(middlewares.addMessageId);
 			tgBot.command("chatinfo", endwares.chatinfo);
+			tgBot.command("bitcoinPrice", endwares.bitcoinPrice);
+			tgBot.command("bitcoinprice", endwares.bitcoinPrice);
 			tgBot.use(middlewares.addBridgesToContext);
 			tgBot.use(middlewares.informThisIsPrivateBot);
 			tgBot.use(middlewares.removeD2TBridges);
