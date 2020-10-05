@@ -283,16 +283,16 @@ function informThisIsPrivateBot(ctx, next) {
 		R.when(
 			// When there is no timer for the chat in the anti spam map
 			ctx => R.not(ctx.TediCross.antiInfoSpamSet.has(ctx.message.chat.id)),
-			// Inform the chat this is an instance of TediCross
+			// Inform the chat this is an instance of Umbrel Bot
 			ctx => {
 				// Update the anti spam set
 				ctx.TediCross.antiInfoSpamSet.add(ctx.message.chat.id);
 
 				// Send the reply
 				ctx.reply(
-					"This is an instance of a [TediCross](https://github.com/TediCross/TediCross) bot, " +
-						"bridging a chat in Telegram with one in Discord. " +
-						"If you wish to use TediCross yourself, please download and create an instance.",
+					"This bot is only made to be used in the Umbrel Discord Server, not anywhere else. " +
+						"If you wish to use this bot yourself, please download and create an instance. " +
+						"See https://github.com/AaronDewes/UmbrelBot",
 					{
 						parse_mode: "markdown"
 					}
