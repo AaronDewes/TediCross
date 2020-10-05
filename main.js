@@ -12,7 +12,6 @@ const MessageMap = require("./src/MessageMap");
 const Bridge = require("./src/bridgestuff/Bridge");
 const BridgeMap = require("./src/bridgestuff/BridgeMap");
 const Settings = require("./src/settings/Settings");
-const migrateSettingsToYAML = require("./src/migrateSettingsToYAML");
 const jsYaml = require("js-yaml");
 const fs = require("fs");
 const R = require("ramda");
@@ -47,10 +46,7 @@ const args = yargs
 		type: "string"
 	}).argv;
 
-// Migrate the settings from JSON to YAML
-const settingsPathJSON = path.join(__dirname, "settings.json");
 const settingsPathYAML = args.config;
-migrateSettingsToYAML(settingsPathJSON, settingsPathYAML);
 
 // Get the settings
 const rawSettingsObj = jsYaml.safeLoad(fs.readFileSync(settingsPathYAML));

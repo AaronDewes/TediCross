@@ -78,11 +78,11 @@ The available settings will occasionally change. The bot takes care of this auto
 
 Anything capable of running [NodeJS](https://nodejs.org) should be able to run Umbrel Bot. People have had success running it on ordinary laptops, raspberry pis, Amazon Web Services, Google Cloud Platform, and other machines. It runs on both Linux and Windows, and probably also macOS. It does NOT, however, run on [Heroku](https://heroku.com)
 
-The machine must be on for Umbrel Bot to work
+The machine must be on for Umbrel Bot to work.
 
 ### Just how much knowledge of the command line do I need to get the bot working?
 
-Not much at all. Almost all the commands are written in the installation guide exactly as they should be entered. The only thing you need to know in addition is the [`cd`](https://en.wikipedia.org/wiki/Cd_(command)) command, in order to navigate to wherever you unpacked Umbrel Bot
+Not much at all. Almost all the commands are written in the installation guide exactly as they should be entered. The only thing you need to know in addition is the [`cd`](https://en.wikipedia.org/wiki/Cd_(command)) command, in order to navigate to wherever you unpacked Umbrel Bot.
 
 ### The bot gives an error with the message `node: not found` when I try to run it
 
@@ -105,7 +105,7 @@ A small gotcha here is that Telegram group chats always have a negative chat ID.
 
 ### The Telegram bot doesn't relay messages sent by other bots
 
-The Telegram team unfortunately decided that bots cannot interact with each other, fearing they would get stuck in infinite loops. This means it is impossible, under any circumstances, for Umbrel Bot to relay messages from other Telegram bots to Discord. Discord does not have this limitation, and the Discord side of the bot will happily relay messages from other Discord bots to Telegram
+The Telegram team unfortunately decided that bots cannot interact with each other, fearing they would get stuck in infinite loops. This means it is impossible, under any circumstances, for Umbrel Bot to relay messages from other Telegram bots to Discord. Discord does not have this limitation, and the Discord side of the bot will happily relay messages from other Discord bots to Telegram.
 
 See https://core.telegram.org/bots/faq#why-doesn-39t-my-bot-see-messages-from-other-bots
 
@@ -114,16 +114,16 @@ See https://core.telegram.org/bots/faq#why-doesn-39t-my-bot-see-messages-from-ot
 Telegram bots are unfortunately completely unable to detect when a message is deleted. There is no way to implement T2D cross-deletion until Telegram implements this.
 **NOTE**: A partial solution to this has been implemented. When a message on Telegram is edited to become just a single dot (`.`), Umbrel Bot will delete it both on Telegram and on Discord.
 
-Deleting messages D2T works as expected
+Deleting messages D2T works as expected.
 
 
 ### When running `npm install`, it complains about missing dependencies?
 
-The [Discord library](https://discord.js.org/#/) Umbrel Bot is using has support for audio channels and voice chat. For this, it needs some additional libraries, like [node-opus](https://www.npmjs.com/package/node-opus), [libsodium](https://www.npmjs.com/package/libsodium) and others. Umbrel Bot does not do audio, so these warnings can safely be ignored
+The [Discord library](https://discord.js.org/#/) Umbrel Bot is using has support for audio channels and voice chat. For this, it needs some additional libraries, like [node-opus](https://www.npmjs.com/package/node-opus), [libsodium](https://www.npmjs.com/package/libsodium) and others. Umbrel Bot does not do audio, so these warnings can safely be ignored.
 
 ### How do I create more bridges?
 
-Umbrel Bot supports a theoretically infinite number of bridges, limited only by your hardware. Even a simple Raspberry Pi is powerful enough to run multiple bridges, so don't worry about making more
+Umbrel Bot supports a theoretically infinite number of bridges, limited only by your hardware. Even a simple Raspberry Pi is powerful enough to run multiple bridges, so don't worry about making more.
 
 To make more bridges, just copy the one you have, paste it right below and make necessary changes:
 
@@ -164,16 +164,14 @@ If you haven't accidently launched two instances of Umbrel Bot, assume the token
 
 ### How do I make the bot run automatically when my computer/server starts?
 
-Take a look in [guides/autostart/](guides/autostart/) of this repo
+Take a look in [guides/autostart/](guides/autostart/) of this repo.
 
 
 ### How do I update Umbrel Bot?
 
-Most updates are annouced on the [Umbrel Bot News channel](https://t.me/Umbrel Bot). Only very minor ones are not
+If you cloned the git repo, just do a `git pull`. Running `npm install` may or may not be necessary. It doesn't hurt to run it anyway.
 
-If you cloned the git repo, just do a `git pull`. Running `npm install` may or may not be necessary. It doesn't hurt to run it anyway
-
-If you downloaded Umbrel Bot as a zip, do step 2, 3 and 4 in the installation guide again. Then move `settings.yaml` (or the deprecated `settings.json`, which will automatically be converted to `settings.yaml`) and the whole `data/` directory from the old version to the new one and start it.
+If you downloaded Umbrel Bot as a zip, do step 2, 3 and 4 in the installation guide again. Then move `settings.yaml` and the whole `data/` directory from the old version to the new one and start it.
 
 ### Why don't you use webhooks to send the messages to Discord? They are much better
 
